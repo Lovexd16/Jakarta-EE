@@ -17,7 +17,7 @@ public class Robot {
     private Long id;
     private UUID serialNr;
     @Column(length = 200, name = "robot_name") //Byter längd och namn på robotname
-    private String robotName;
+    private String robotName; //i postman skickas det fortfarande in som detta namn
     private String job;
     private String image;
     private String city;

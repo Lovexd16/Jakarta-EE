@@ -1,18 +1,25 @@
 package org.irdb;
 
 import java.util.List;
+import java.util.UUID;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @Transactional(Transactional.TxType.SUPPORTS)
+@ApplicationScoped
 public class RobotService {
 
+    @Inject
     EntityManager em; //EntityManager förkortas till em
+
+    UUID uuid;
     
     //Lista alla robotar
     public List<Robot> findAll() {
-        List<Robot> robots = em.createQuery("SELECT r FROM Robot r", Robot.class).getResultList(); //r för Robot. SQL-kommandon med stora bokstäver
+        List<Robot> robots = em.createQuery("SELECT r FROM Robot r", Robot.class).getResultList(); //r för robot. SQL-kommandon med stora bokstäver
         return robots;
     }
 
@@ -29,6 +36,7 @@ public class RobotService {
     //Skapa robot
     @Transactional(Transactional.TxType.REQUIRED)
     public Robot create(Robot robot) {
+        robot.setSerialNr(UUID.randomUUID());
         em.persist(robot);
         return robot;
     }
