@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 public class Robot {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private UUID serialNr;
     @Column(length = 200, name = "robot_name") //Byter längd och namn på robotname
