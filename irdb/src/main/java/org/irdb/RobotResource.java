@@ -4,6 +4,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -27,6 +30,15 @@ public class RobotResource {
 
     //Get för att hämta alla robotar
     @GET
+    @Operation(summary = "Visa alla robotar", description = "Hämtar och visar samtliga robotar som finns i databasen.") //Talar om vad endpointen gör i swagger
+    @APIResponse( //Tarar om vad response coden för endpointen innebär
+        responseCode = "200",
+        description = "Alla robotar"
+    )
+    @APIResponse(
+        responseCode = "204",
+        description = "Fanns inga robotar"
+    )
     public Response getRobots() {
 
         //Mock-lista
