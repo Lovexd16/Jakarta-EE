@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns="http://www.w3.org/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+>
+<h:head></h:head>
+<h:body>
+    <h1>Robots: #{robotService.countAll()}st</h1>
+
+    <p:dataTable value="#{robotService.findAll()}" var="robot">
+        <p:column headerText="Robot name">
+            <h:outputText value="#{robot.robotName}"></h:outputText>
+        </p:column>
+        <p:column headerText="Job">
+            <h:outputText value="#{robot.job}"></h:outputText>
+        </p:column>
+        <p:column headerText="Where">
+            <h:outputText value="#{robot.city}"></h:outputText>
+        </p:column>
+        <p:column headerText="Image">
+            <img src="#{robot.image}"/>
+        </p:column>
+    </p:dataTable>
+</h:body>
+</html>

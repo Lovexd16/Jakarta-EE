@@ -5,11 +5,13 @@ import java.util.UUID;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
+@Named //Gör så man kan komma åt metoderna i frontend
 public class RobotService {
 
     @Inject
