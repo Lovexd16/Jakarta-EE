@@ -2,11 +2,12 @@ package org.irdb;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.inject.Inject;
-import jakarta.websocket.server.PathParam;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -41,7 +42,7 @@ public class RobotResource {
     //Get för att hämta en robot med id
     @GET
     @Path("/{id}") //Lägger till id i slutet av den orginella pathen
-    public Response getRobotById(@PathParam("id") Long id) {
+    public Response getRobotById(@PathParam("id") @Min(1) Long id) {
 
         Robot robot = robotService.find(id);
 
@@ -60,7 +61,7 @@ public class RobotResource {
 
     //Post för att skapa en robot
     @POST
-    public Response createRobot(Robot robot) throws URISyntaxException {
+    public Response createRobot(@Valid Robot robot) throws URISyntaxException { //@Valid så att felmeddelanden blir bättre
 
         robot = robotService.create(robot);
 
@@ -71,7 +72,7 @@ public class RobotResource {
     //Delete för att ta bort en robot
     @DELETE
     @Path("/{id}")
-    public Response deleteRobot(@PathParam("id") Long id) {
+    public Response deleteRobot(@PathParam("id") @Min(1) Long id) {
 
         robotService.delete(id);
         return Response.noContent().build();
